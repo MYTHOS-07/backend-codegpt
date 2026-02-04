@@ -22,17 +22,12 @@ app.use("/api", chatRoutes);
 app.get("/", (req, res) => {
   res.json({
     name: config.name,
-    port: config.port,
+    port: config.PORT,
     status: "OK",
     version: config.version,
   });
 });
 
-// In Vercel, the Express app is used as a serverless handler; locally we still listen on a port
-if (!process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`Server is up at Port ${PORT}`);
-  });
-}
-
-export default app;
+app.listen(PORT, () => {
+  console.log(`Server is up at Port ${PORT}`);
+});
